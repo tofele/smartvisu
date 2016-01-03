@@ -1,0 +1,278 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+
+	<style>
+		.nav-custom .ui-btn .ui-btn-inner {
+			padding-top: 40px !important;
+		}
+
+		.nav-custom .ui-btn .ui-icon {
+			width: 30px !important;
+			height: 30px !important;
+			margin-left: -15px !important;
+			box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			-webkit-box-shadow: none !important;
+			-webkit-border-radius: 0 !important;
+			border-radius: 0 !important;
+		}
+
+		#technik .ui-icon {
+			background: url({{ icon0 }}sani_boiler_temp.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#strom .ui-icon {
+			background: url({{ icon0 }}measure_power_meter.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#luxtronic .ui-icon {
+			background: url({{ icon0 }}sani_earth_source_heat_pump.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#solar .ui-icon {
+			background: url({{ icon0 }}sani_solar.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#wasser .ui-icon {
+			background: url({{ icon0 }}sani_water_tap.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#lueftung .ui-icon {
+			background: url({{ icon0 }}vent_ventilation.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#quadra .ui-icon {
+			background: url({{ icon0 }}weather_station_quadra.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+	</style>
+	<div data-role="navbar" class="nav-custom">
+		<ul>
+			<li><a href="index.php?page=Technik" id="technik" data-icon="custom">Übersicht</a></li>
+			<li><a href="index.php?page=Strom" id="strom" data-icon="custom">Strom</a></li>
+			<li><a href="index.php?page=Luxtronic" class="ui-btn-active" id="luxtronic" data-icon="custom">Wärmepumpe</a></li>
+			/**
+			<li><a href="index.php?page=Solar" id="solar" data-icon="custom">Solar</a></li>
+			<li><a href="index.php?page=Wasser" id="wasser" data-icon="custom">Wasser</a></li>
+			*/
+            <li><a href="index.php?page=Lueftung" id="lueftung" data-icon="custom">Lüftung</a></li>
+			<li><a href="index.php?page=Quadra" id="quadra" data-icon="custom">Quadra</a></li>
+		</ul>
+	</div>
+
+/**
+	<div class="preblock">
+		<table width="100%">
+			<tr>
+				<td align="middle" width="70%">
+					Heizung
+				</td>
+			</tr>
+		</table>
+	</div>
+*/
+
+	<h3>Heizungsanlage</h3>
+	{{ plot.period('Plot.Heizung', ['Luxtronic.TVL', 'Luxtronic.TRL', 'Luxtronic.TBW', 'Luxtronic.TFB1'], 'max', '10d', 0, 20, 100, '', ['Vorlauf', 'Rücklauf', 'Warmwasser', 'FBH VL'], ['#a00', '#00a', '#0a0', '#aa0'], ['line', 'line', 'line', 'line'], ['', 'Temperatur in °C'], '1h') }}
+
+	<h3>Stromverbrauch Ganzes Haus</h3>
+	{{ plot.period('Plot.StromVerbrauch', 'Strom.WL_P14', 'max', '10d', 0, 0, '', '', 'Stromverbrauch', '', '', ['', 'Verbrauch in W'], '1h') }}
+/**
+	<h3>Wärmequelle</h3>
+	{{ plot.period('Plot.TWQ', ['Luxtronic.TWQein', 'Luxtronic.TWQaus'], 'max', '10d', 0, 0, '', '', ['TWQein', 'TWQaus'], ['#00a', '#a00'], ['line', 'line'], '', '1h') }}
+*/
+
+/**
+	<h3>Ausgänge</h3>
+	{{ plot.period('Plot.InOut', ['Luxtronic.ZW1', 'Luxtronic.BUP', 'Luxtronic.HUP', 'Luxtronic.VD1'], 'max', '10d', 0, 0, '', '', ['ZW1', 'BUP', 'HUP', 'VD1'], ['#a00', '#00a', '#0a0', '#0aa'], ['line', 'line', 'line', 'line'], '', '1h') }}
+*/
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Aktuelle Daten:</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							WP Vorlauftemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('WP.TVL', 'Luxtronic.TVL', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							WP Rücklauftemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('WP.TRL', 'Luxtronic.TRL', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							WP Rücklauftemperatur (Soll):
+						</td>
+						<td align=right>
+							{{ basic.float('FBH.TRLsoll', 'Luxtronic.TRLsoll', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Warmwasser Temperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('WW.Temp', 'Luxtronic.TBW', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Warmwasser Temperatur (Soll):
+						</td>
+						<td align=right>
+							{{ basic.float('WW.Soll', 'Luxtronic.TBWsoll', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Fussbodenheizung Vorlauftemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('FBH.TVL', 'Luxtronic.TFB1', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Fussbodenheizung Solltemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('FBH.TMK1soll', 'Luxtronic.TMK1soll', '°C') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>StatusPumpen:</h3>
+				<table width="100%">
+					<tr>
+						<td align="left">
+							{{ basic.symbol('Lux.HUP1', 'Luxtronic.HUP', 'Heizung Umwälzpumpe läuft', icon1~'sani_pump.png') }}
+							{{ basic.symbol('Lux.HUP2', 'Luxtronic.HUP', 'Heizung Umwälzpumpe läuft nicht', icon0~'sani_pump.png', 0) }}
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							{{ basic.symbol('Lux.BUP1', 'Luxtronic.BUP', 'Warmwasser Umwälzpumpe läuft', icon1~'sani_pump.png') }}
+							{{ basic.symbol('Lux.BUP2', 'Luxtronic.BUP', 'Warmwasser Umwälzpumpe läuft nicht', icon0~'sani_pump.png', 0) }}
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							{{ basic.symbol('Lux.MA1', 'Luxtronic.MA1', 'Mischer 1 Auf', icon1~'sani_pump.png') }}
+							{{ basic.symbol('Lux.MZ1', 'Luxtronic.MZ1', 'Mischer 1 Zu', icon1~'sani_pump.png', 0) }}
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+
+    {% import "tom.html" as tom %}
+
+    <div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Schlafzimmer</h3>
+				<table width="100%">
+
+					<tr><td align="left">Eltern:</td><td align="right">{{ tom.temps('Eltern.Temps', 'Temperaturen.Eltern.Raum', 'Heizung.Eltern.Soll', 'Temperaturen.Eltern.Feuchte') }}</td> </tr>
+					<tr><td align="left">Julius:</td><td align="right">{{ tom.temps('Julius.Temps', 'Temperaturen.Julius.Raum', 'Heizung.Julius.Soll', 'Temperaturen.Julius.Feuchte') }}</td> </tr>
+					<tr><td align="left">Max:</td><td align="right">{{ tom.temps('Max.Temps', 'Temperaturen.Max.Raum', 'Heizung.Max.Soll', 'Temperaturen.Max.Feuchte') }}</td> </tr>
+					<tr><td align="left">Luise:</td><td align="right">{{ tom.temps('Luise.Temps', 'Temperaturen.Luise.Raum', 'Heizung.Luise.Soll', 'Temperaturen.Luise.Feuchte') }}</td> </tr>
+					<tr><td align="left">Büro:</td><td align="right">{{ tom.temps('Buero.Temps', 'Temperaturen.Buero.Raum', 'Heizung.Buero.Soll', 'Temperaturen.Buero.Feuchte') }}</td> </tr>
+				</table>
+			</div>
+		</div>
+    </div>
+
+    <div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Badezimmer</h3>
+				<table width="100%">
+					<tr><td align="left">Elternbad:</td><td align="right">{{ tom.temps('Elternbad.Temps', 'Temperaturen.Elternbad.Raum', 'Heizung.Elternbad.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Kinderbad:</td><td align="right">{{ tom.temps('Kinderbad.Temps', 'Temperaturen.Kinderbad.Raum', 'Heizung.Kinderbad.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Gästebad:</td><td align="right">{{ tom.temps('Gaestebad.Temps', 'Temperaturen.Gaestebad.Raum', 'Heizung.Entree_Bad.Soll', 0) }}</td> </tr>
+				</table>
+			</div>
+		</div>
+    </div>
+
+    <div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Küche, Essen & Wohnen</h3>
+				<table width="100%">
+					<tr><td align="left">Küche:</td><td align="right">{{ tom.temps('Kueche.Temps', 'Temperaturen.Kueche.Raum', 'Heizung.Kueche.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Essen:</td><td align="right">{{ tom.temps('Essen.Temps', 'Temperaturen.Essen.Raum', 'Heizung.Essen1.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Wohnen:</td><td align="right">{{ tom.temps('Wohnen.Temps', 'Temperaturen.Wohnen.Raum', 'Heizung.Wohnen.Soll', 'Temperaturen.Wohnen.Feuchte') }}</td> </tr>
+				</table>
+			</div>
+		</div>
+    </div>
+
+    <div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Nebenräume</h3>
+				<table width="100%">
+					<tr><td align="left">Entrée:</td><td align="right">{{ tom.temps('Entree.Temps', 'Temperaturen.Entree.Raum', 'Heizung.Entree_Bad.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Gang:</td><td align="right">{{ tom.temps('Gang.Temps', 'Temperaturen.Gang.Raum', 0, 0) }}</td> </tr>
+					<tr><td align="left">Vorplatz:</td><td align="right">{{ tom.temps('Vorplatz.Temps', 'Temperaturen.Vorplatz.Raum', 0, 0) }}</td> </tr>
+					<tr><td align="left">Waschen:</td><td align="right">{{ tom.temps('Waschen.Temps', 'Temperaturen.Waschen.Raum', 'Heizung.Waschen.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Basteln:</td><td align="right">{{ tom.temps('Basteln.Temps', 'Temperaturen.Basteln.Raum', 'Heizung.Basteln.Soll', 0) }}</td> </tr>
+					<tr><td align="left">Keller:</td><td align="right">{{ tom.temps('Keller.Temps', 'Temperaturen.Keller.1W_Raum', 0, 'Temperaturen.Keller.Feuchte') }}</td> </tr>
+				</table>
+			</div>
+		</div>
+    </div>
+
+{% endblock %}

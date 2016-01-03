@@ -1,0 +1,670 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% import "icon.html" as icon %}
+
+{% block content %}
+
+	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+
+	<style>
+		.nav-custom .ui-btn .ui-btn-inner {
+			padding-top: 40px !important;
+		}
+
+		.nav-custom .ui-btn .ui-icon {
+			width: 30px !important;
+			height: 30px !important;
+			margin-left: -15px !important;
+			box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			-webkit-box-shadow: none !important;
+			-webkit-border-radius: 0 !important;
+			border-radius: 0 !important;
+		}
+
+		#technik .ui-icon {
+			background: url({{ icon0 }}sani_boiler_temp.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#strom .ui-icon {
+			background: url({{ icon0 }}measure_power_meter.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#luxtronic .ui-icon {
+			background: url({{ icon0 }}sani_earth_source_heat_pump.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#solar .ui-icon {
+			background: url({{ icon0 }}sani_solar.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#wasser .ui-icon {
+			background: url({{ icon0 }}sani_water_tap.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#lueftung .ui-icon {
+			background: url({{ icon0 }}vent_ventilation.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#quadra .ui-icon {
+			background: url({{ icon0 }}weather_station_quadra.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+	</style>
+	<div data-role="navbar" class="nav-custom">
+		<ul>
+			<li><a href="index.php?page=Technik" id="technik" data-icon="custom">Übersicht</a></li>
+			<li><a href="index.php?page=Strom" id="strom" data-icon="custom">Strom</a></li>
+			<li><a href="index.php?page=Luxtronic" id="luxtronic" data-icon="custom">Wärmepumpe</a></li>
+			/**
+			<li><a href="index.php?page=Solar" id="solar" data-icon="custom">Solar</a></li>
+			<li><a href="index.php?page=Wasser" id="wasser" data-icon="custom">Wasser</a></li>
+			*/
+			<li><a href="index.php?page=Lueftung" id="lueftung" data-icon="custom">Lüftung</a></li>
+            <li><a href="index.php?page=Quadra" class="ui-btn-active" id="quadra" data-icon="custom">Quadra</a></li>
+		</ul>
+	</div>
+
+
+	{% import "tom.html" as tom %}
+
+/**
+	<div class="preblock">
+		<table width="100%">
+			<tr>
+				<td align="middle" width="70%">
+					Quadra
+				</td>
+			</tr>
+		</table>
+	</div>
+*/
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Wetter:</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Temperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Temperatur', 'Quadra.Temperatur', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Windgeschwindigkeit:
+						</td>
+						<td align=center>
+							{{ basic.float('Quadra.Windgeschwindigkeit_ms', 'Quadra.Windgeschwindigkeit_ms', 'm/s') }}
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Windgeschwindigkeit_kmh', 'Quadra.Windgeschwindigkeit_kmh', 'km/h') }}
+						</td>
+					</tr>
+				</table>
+				/**
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Windgeschwindigkeit (km/h):
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Windgeschwindigkeit_kmh', 'Quadra.Windgeschwindigkeit_kmh', 'km/h') }}
+						</td>
+					</tr>
+				</table>
+				*/
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Windrichtung:
+						</td>
+						<td align=right>
+							{{ basic.value('Quadra.Windrichtung', 'Quadra.Windrichtung', 'Grad') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Niederschlag (Ja/Nein):
+						</td>
+						<td align=right>
+							{{ basic.value('Quadra.Niederschlag', 'Quadra.Niederschlag', '') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Niederschlag (Empfindlichkeit):
+						</td>
+						<td align=right>
+							{{ basic.value('Quadra.NiederschlagEmpfindlichkeit', 'Quadra.NiederschlagEmpfindlichkeit', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sonne Azimut:
+						</td>
+						<td align=center>
+							{{ basic.value('Quadra.Azimut_180', 'Quadra.Azimut_180', 'Grad') }}
+						</td>
+						<td align=right>
+							{{ basic.value('Quadra.Azimut', 'Quadra.Azimut', 'Grad') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sonne Elevation:
+						</td>
+						<td align=right>
+							{{ basic.value('Quadra.Elevation', 'Quadra.Elevation', 'Grad') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Globalstrahlung / Helligkeit:</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Nord:
+						</td>
+						<td align=center>
+							{{ basic.float('Quadra.Globalstrahlung.Nord', 'Quadra.Globalstrahlung.Nord', 'W/m2') }}
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Helligkeit.Nord', 'Quadra.Helligkeit.Nord', 'Lux') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Ost:
+						</td>
+						<td align=center>
+							{{ basic.float('Quadra.Globalstrahlung.Ost', 'Quadra.Globalstrahlung.Ost', 'W/m2') }}
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Helligkeit.Ost', 'Quadra.Helligkeit.Ost', 'Lux') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Süd:
+						</td>
+						<td align=center>
+							{{ basic.float('Quadra.Globalstrahlung.Sued', 'Quadra.Globalstrahlung.Sued', 'W/m2') }}
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Helligkeit.Sued', 'Quadra.Helligkeit.Sued', 'Lux') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							West:
+						</td>
+						<td align=center>
+							{{ basic.float('Quadra.Globalstrahlung.West', 'Quadra.Globalstrahlung.West', 'W/m2') }}
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Helligkeit.West', 'Quadra.Helligkeit.West', 'Lux') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sky:
+						</td>
+						<td align=center>
+							{{ basic.float('Quadra.Globalstrahlung.Sky', 'Quadra.Globalstrahlung.Sky', 'W/m2') }}
+						</td>
+						<td align=right>
+							{{ basic.float('Quadra.Helligkeit.Sky', 'Quadra.Helligkeit.Sky', 'Lux') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Windrichtung:
+						</td>
+						<td align=right>
+							{{ icon.windrose('icon1', '', 'Quadra.Windrichtung', 0, 360) }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Temperatur</h3>
+				{{ plot.period('Plot.Quadra.Temperatur', 'Quadra.Temperatur', 'max', '24h', '', '', '', '', 'Temperatur', '', '', ['', '°C'], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Niederschlag</h3>
+				{{ plot.period('Plot.Niederschlag', 'Quadra.Niederschlag', 'avg', '24h', '', '', '', '', 'Niederschlag', '', '', ['', ''], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Windgeschwindigkeit (m/s)</h3>
+				{{ plot.period('Plot.Quadra.Windgeschwindigkeit_ms', 'Quadra.Windgeschwindigkeit_ms', 'max', '24h', '', '', '', '', 'Windgeschwindigkeit', '', '', ['', 'm/s'], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Windrichtung</h3>
+				{{ plot.period('Plot.Quadra.Windrichtung', 'Quadra.Windrichtung', 'avg', '24h', '', '', '', '', 'Windrichtung', '', '', ['', 'Grad'], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Helligkeit Himmelsrichtungen:</h3>
+				{{ plot.period('Plot.Quadra.Helligkeit', ['Quadra.Helligkeit.Ost', 'Quadra.Helligkeit.Sued', 'Quadra.Helligkeit.West', 'Quadra.Helligkeit.Nord'], 'max', '24h', '', 0, '', '', ['Ost', 'Süd', 'West', 'Nord'], ['#a00', '#00a', '#0a0', '#aa0'], '', ['', 'Lux'], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Helligkeit Sky:</h3>
+				{{ plot.period('Plot.Quadra.Helligkeit.Sky', ['Quadra.Helligkeit.Sky'], 'max', '24h', '', 0, '', '', ['Sky'], '', '', ['', 'Lux'], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+/**
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sonnenstand</h3>
+				{{ plot.period('Plot.Sonnenstand', ['Quadra.Azimut', 'Quadra.Elevation'], 'max', '24h', '', '', '', '', ['Azimut', 'Elevation'], '', '', 'Grad', '1h' ) }}
+			</div>
+		</div>
+	</div>
+*/
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Azimut</h3>
+				{{ plot.period('Plot.Azimut', ['Quadra.Azimut', 'Quadra.Azimut_180'], 'max', '24h', '', '', '', '', ['Azimut', 'Azimut-180'], '', '', 'Grad', '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Elevation</h3>
+				{{ plot.period('Plot.Elevation', 'Quadra.Elevation', 'max', '24h', '', '', '', '', 'Elevation', '', '', ['', 'Grad'], '1h' ) }}
+			</div>
+		</div>
+	</div>
+
+/**
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 1 (Süden, Eltern):</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Auf/Ab:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor1.AufAb', 'Quadra.Sektor1.AufAb', icon1~'control_arrow_down.png', icon0~'control_arrow_up.png') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Auf/Beschattung:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor1.AufBeschattung', 'Quadra.Sektor1.AufBeschattung', icon1~'control_arrow_down.png', icon0~'control_arrow_up.png') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Höhe:
+						</td>
+						<td align=right>
+							{{ basic.slider('Quadra.Sektor1.Hoehe', 'Quadra.Sektor1.Hoehe', 100, 0, 5) }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Winkel:
+						</td>
+						<td align=right>
+							{{ basic.slider('Quadra.Sektor1.Winkel', 'Quadra.Sektor1.Winkel', 100, 0, 5) }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Automatiksperre:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor1.Automatiksperre', 'Quadra.Sektor1.Automatiksperre') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Sicherheit 1 (Windalarm):
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor1.Sicherheit1', 'Quadra.Sektor1.Sicherheit1') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sektor 1 Sicherheit 2 (Regen-/Frostalarm):
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor1.Sicherheit2', 'Quadra.Sektor1.Sicherheit2') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+*/
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 6 (Süden, Eltern, Wohnen/Essen):</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Auf/Ab:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor6.AufAb', 'Quadra.Sektor6.AufAb', icon1~'control_arrow_down.png', icon0~'control_arrow_up.png') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Auf/Beschattung:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor6.AufBeschattung', 'Quadra.Sektor6.AufBeschattung', icon1~'control_arrow_down.png', icon0~'control_arrow_up.png') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Höhe:
+						</td>
+						<td align=right>
+							{{ basic.slider('Quadra.Sektor6.Hoehe', 'Quadra.Sektor6.Hoehe', 0, 100, 5) }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Winkel:
+						</td>
+						<td align=right>
+							{{ basic.slider('Quadra.Sektor6.Winkel', 'Quadra.Sektor6.Winkel', 0, 100, 5) }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Automatiksperre:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor6.Automatiksperre', 'Quadra.Sektor6.Automatiksperre') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sicherheit 1 (Windalarm):
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor6.Sicherheit1', 'Quadra.Sektor6.Sicherheit1') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sicherheit 2 (Regen-/Frostalarm):
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor6.Sicherheit2', 'Quadra.Sektor6.Sicherheit2') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 8 (Süden, Eltern, Wohnen/Essen):</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Auf/Ab:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor8.AufAb', 'Quadra.Sektor8.AufAb', icon1~'control_arrow_down.png', icon0~'control_arrow_up.png') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Auf/Beschattung:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor8.AufBeschattung', 'Quadra.Sektor8.AufBeschattung', icon1~'control_arrow_down.png', icon0~'control_arrow_up.png') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Höhe:
+						</td>
+						<td align=right>
+							{{ basic.slider('Quadra.Sektor8.Hoehe', 'Quadra.Sektor8.Hoehe', 0, 100, 5) }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Winkel:
+						</td>
+						<td align=right>
+							{{ basic.slider('Quadra.Sektor8.Winkel', 'Quadra.Sektor8.Winkel', 0, 100, 5) }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Automatiksperre:
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor8.Automatiksperre', 'Quadra.Sektor8.Automatiksperre') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sicherheit 1 (Windalarm):
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor8.Sicherheit1', 'Quadra.Sektor8.Sicherheit1') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Sicherheit 2 (Regen-/Frostalarm):
+						</td>
+						<td align=right>
+							{{ basic.switch('Quadra.Sektor8.Sicherheit2', 'Quadra.Sektor8.Sicherheit2') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 6 (Westen, Eltern, Wohnen/Essen):</h3>
+				{{ tom.shutter('Shutter.Sektor6', '', 'Quadra.Sektor6.AufAb', 'Quadra.Sektor6.Wippen', 'Quadra.Sektor6.Hoehe', 'Quadra.Sektor6.Wippen', 'Quadra.Sektor6.Winkel', '', 0, 100, 5, full) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 8 (Westen, Sonnenmarkisen):</h3>
+				{{ tom.shutter('Shutter.Sektor8', '', 'Quadra.Sektor8.AufAb', 'Quadra.Sektor8.Wippen', 'Quadra.Sektor8.Hoehe', 'Quadra.Sektor8.Wippen', '', '', 0, 100, 5, full) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 6 (Westen, Eltern, Wohnen/Essen):</h3>
+				{{ tom.blind('Shutter.Sektor6', '', 'Quadra.Sektor6.AufAb', 'Quadra.Sektor6.Wippen', 'Quadra.Sektor6.Hoehe', 'Quadra.Sektor6.Wippen', 'Quadra.Sektor6.Winkel', '', 0, 100, 5, full) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Sektor 8 (Westen, Sonnenmarkisen):</h3>
+				{{ tom.blind('Shutter.Sektor8', '', 'Quadra.Sektor8.AufAb', 'Quadra.Sektor8.Wippen', 'Quadra.Sektor8.Hoehe', '', 'Quadra.Sektor8.Wippen', '', 0, 100, 5, full) }}
+			</div>
+		</div>
+	</div>
+
+/**
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Test 1</h3>
+				{{ icon.windrose('icon1', '', 'Quadra.Windrichtung', 0, 360) }}
+				{{ icon.blade_z('icon1', '', 'Quadra.Sektor6.Winkel', 0, 100) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Test 2</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Test 3</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Test 4</h3>
+			</div>
+		</div>
+	</div>
+*/
+
+{% endblock %}
+

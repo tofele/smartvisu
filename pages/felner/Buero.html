@@ -1,0 +1,185 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+{% import "widget_uzsu.html" as uzsu %}.
+
+	<h1><img class="icon" src='{{ icon0 }}scene_office.svg' />Büro</h1>
+
+	
+	<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Deckenlampe</h3>
+			<table width=100%>
+				<tr>
+					<td align=left>
+						{{ device.dimmer('Buero.Licht.Deckenlampe', 'Deckenlampe', 'Buero.Licht.Deckenlampe', 'Buero.Licht.Deckenlampe.dimmen', 0, 100, 10 ) }}
+					</td>
+					<td align=right>
+						{{ uzsu.uzsu_icon('Buero.Licht.Deckenlampe', 'Buero.Licht.Deckenlampe.uzsu', 'Deckenlampe') }}
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Steckdosen</h3>
+			<table width=100%>
+				<tr>
+					<td align=right style="padding-right: 10px;">
+						Tuere:
+					</td>
+					<td align=right>
+						{{ basic.switch('Buero.Steckdosen.Tuere', 'Tuere',icon1~'message_socket_ch.png',icon0~'message_socket_ch.png' ) }}
+					</td>
+					<td align=right style="padding-right: 10px;">
+						Balkon:
+					</td>
+					<td align=right>
+						{{ basic.switch('Buero.Steckdosen.Balkon', 'Balkon',icon1~'message_socket_ch.png',icon0~'message_socket_ch.png' ) }}
+					</td>
+				</tr>
+				<tr>
+					<td align=right style="padding-right: 10px;">
+						Bodendose:
+					</td>
+					<td align=right>
+						{{ basic.switch('Buero.Steckdosen.Bodendose', 'Bodendose',icon1~'message_socket_ch.png',icon0~'message_socket_ch.png' ) }}
+					</td>
+					<td align=right style="padding-right: 10px;">
+						Wand:
+					</td>
+					<td align=right>
+						{{ basic.switch('Buero.Steckdosen.Wand', 'Wand',icon1~'message_socket_ch.png',icon0~'message_socket_ch.png' ) }}
+					</td>
+				</tr>
+				<tr>
+					<td align=right style="padding-right: 10px;">
+						Wand Tuere:
+					</td>
+					<td align=right>
+						{{ basic.switch('Buero.Steckdosen.WandTuere', 'Wand Tuere',icon1~'message_socket_ch.png',icon0~'message_socket_ch.png' ) }}
+					</td>
+					<td align=right style="padding-right: 10px;">
+						Decke:
+					</td>
+					<td align=right>
+						{{ basic.switch('Buero.Steckdosen.Decke', 'Decke',icon1~'message_socket_ch.png',icon0~'message_socket_ch.png' ) }}
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Storen</h3>
+			{{ device.blind('Buero.Storen', '', 'Buero.Storen.move', 'Buero.Storen.stop', 'Buero.Storen.position', 'Buero.Storen.shift', 'Buero.Storen.angle') }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Heizung Büro</h3>
+			{% import "tom.html" as tom %} {{ tom.rtr('Buero.Heizung.RTR', '', 'Temperaturen.Buero.Raum', 'Heizung.Buero.Soll', 'Heizung.Buero.Sollwertverschiebung', 'Heizung.Buero.Komfort', 'Heizung.Buero.Nacht', 'Heizung.Buero.Frostschutz', 'Heizung.Buero.Heizen', 'Heizung.Buero.Stellwert') }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>RTR Plot Büro</h3>
+			{{ plot.rtr('Buero.Heizung.Plot', 'Temperaturen.Buero.Raum', 'Heizung.Buero.Soll', 'Heizung.Buero.Stellwert') }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Stellwert Büro</h3>
+			{{ plot.period('Buero.Heizung.Stellwert', 'Heizung.Buero.Stellwert', 'max', '24h', '', 0, 100, '', 'Stellwert Büro', '', '', ['', '% Offen'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Raumtemperatur Büro</h3>
+			{{ plot.period('Buero.Heizung.Temp', 'Temperaturen.Buero.Raum', 'max', '24h', '', '', '', '', 'Raumtemperatur', '', '', ['', '°C'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Büro Temperaturen</h3>
+			{{ plot.period('Buero.Temperaturen', ['Heizung.Buero.Soll', 'Temperaturen.Buero.Raum', 'Temperaturen.Buero.1W_Bodendose', 'Temperaturen.Buero.1W_Tuere', 'Temperaturen.Buero.1W_Wand'], 'max', '24h', '', '', '', '', ['Soll', 'Raum', 'Estrich Fenster', '1W Tuere', '1W Wand'], '', '', ['', '°C'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Büro rel. Feuchtigkeit</h3>
+			{{ plot.period('Buero.Feuchte.Feuchte', 'Temperaturen.Buero.Feuchte', 'max', '24h', '', 0, 100, '', 'Luftfeuchtigkeit', '', '', ['', '% rel. Feuchtigkeit'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Büro Taupunkt</h3>
+			{{ plot.period('Buero.Feuchte.Taupunkt', 'Temperaturen.Buero.Taupunkt', 'max', '24h', '', 0, 30, '', 'Taupunkt', '', '', ['', '°C'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Büro Komfort</h3>
+			{{ plot.comfortchart('Buero.Feuchte.Komfort', 'Temperaturen.Buero.Raum', 'Temperaturen.Buero.Feuchte') }}
+		</div>
+
+	</div>
+</div>
+
+
+{% endblock %}
+
