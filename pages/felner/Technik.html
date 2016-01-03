@@ -1,0 +1,640 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Frank Berlenz
+* @copyright   2013
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+
+	<style>
+		.nav-custom .ui-btn .ui-btn-inner {
+			padding-top: 40px !important;
+		}
+
+		.nav-custom .ui-btn .ui-icon {
+			width: 30px !important;
+			height: 30px !important;
+			margin-left: -15px !important;
+			box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			-webkit-box-shadow: none !important;
+			-webkit-border-radius: 0 !important;
+			border-radius: 0 !important;
+		}
+
+		#technik .ui-icon {
+			background: url({{ icon0 }}sani_boiler_temp.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#strom .ui-icon {
+			background: url({{ icon0 }}measure_power_meter.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#luxtronic .ui-icon {
+			background: url({{ icon0 }}sani_earth_source_heat_pump.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#solar .ui-icon {
+			background: url({{ icon0 }}sani_solar.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#wasser .ui-icon {
+			background: url({{ icon0 }}sani_water_tap.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#lueftung .ui-icon {
+			background: url({{ icon0 }}vent_ventilation.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#quadra .ui-icon {
+			background: url({{ icon0 }}weather_station_quadra.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+	</style>
+	<div data-role="navbar" class="nav-custom">
+		<ul>
+			<li><a href="index.php?page=Technik" class="ui-btn-active" id="technik" data-icon="custom">Übersicht</a></li>
+			<li><a href="index.php?page=Strom" id="strom" data-icon="custom">Strom</a></li>
+			<li><a href="index.php?page=Luxtronic" id="luxtronic" data-icon="custom">Wärmepumpe</a></li>
+			/**
+			<li><a href="index.php?page=Solar" id="solar" data-icon="custom">Solar</a></li>
+			<li><a href="index.php?page=Wasser" id="wasser" data-icon="custom">Wasser</a></li>
+			*/
+			<li><a href="index.php?page=Lueftung" id="lueftung" data-icon="custom">Lüftung</a></li>
+			<li><a href="index.php?page=Quadra" id="quadra" data-icon="custom">Quadra</a></li>
+		</ul>
+	</div>
+
+/**
+	<div class="preblock">
+		<table width="100%">
+			<tr>
+				<td align="middle" width="70%">
+					Úbersicht
+				</td>
+			</tr>
+		</table>
+	</div>
+*/
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Wärmepumpe</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							WP Vorlauftemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('WP.TVL', 'Luxtronic.TVL', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							WP Rücklauftemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('WP.TRL', 'Luxtronic.TRL', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							WP Rücklauftemperatur (Soll):
+						</td>
+						<td align=right>
+							{{ basic.float('FBH.TRLsoll', 'Luxtronic.TRLsoll', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Warmwasser Temperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('WW.Temp', 'Luxtronic.TBW', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Warmwasser Temperatur (Soll):
+						</td>
+						<td align=right>
+							{{ basic.float('WW.Soll', 'Luxtronic.TBWsoll', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Fussbodenheizung Vorlauftemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('FBH.TVL', 'Luxtronic.TFB1', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Fussbodenheizung Solltemperatur:
+						</td>
+						<td align=right>
+							{{ basic.float('FBH.TMK1soll', 'Luxtronic.TMK1soll', '°C') }}
+						</td>
+					</tr>
+				</table>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Heizung Umwälzpumpe:
+						</td>
+						<td align=right>
+							{{ basic.text('HUP', 'Luxtronic.HUP', 'läuft', 'läuft nicht') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Warmwasser Umwälzpumpe:
+						</td>
+						<td align=right>
+							{{ basic.text('PumpeKessel', 'Luxtronic.BUP', 'läuft', 'läuft nicht') }}
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Lüftung</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Komforttemparatur:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Komfort', 'Lueftung.Temperatur.Komfort', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Aussenluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Aussenluft', 'Lueftung.Temperatur.Aussenluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Zuluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Zuluft', 'Lueftung.Temperatur.Zuluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Abluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Abluft', 'Lueftung.Temperatur.Abluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Fortluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Fortluft', 'Lueftung.Temperatur.Fortluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Ventilator Zuluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Vent.Zuluft', 'Lueftung.Status.Ventilator_Zuluft', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Ventilator Abluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Vent.Abluft', 'Lueftung.Status.Ventilator_Abluft', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Bypass:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Status.Bypass', 'Lueftung.Status.Bypass', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Lüftungsstufe:
+						</td>
+						<td align=right>
+							{{ basic.value('Lueftung.Status.Stufe', 'Lueftung.Status.Stufe') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Strom Zähler</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkenergie A14:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WE_A14_kWh', 'Strom.WE_A14_kWh', 'kWh') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkenergie A23:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WE_A23_kWh', 'Strom.WE_A23_kWh', 'kWh') }}
+						</td>
+					</tr>
+				</table>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Blindenergie R12:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.BE_R12_kvarh', 'Strom.BE_R12_kvarh', 'kvarh') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Blindenergie R34:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.BE_R34_kvarh', 'Strom.BE_R34_kvarh', 'kvarh') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Aktuelle Strom Leistung</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkleistung P14:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WL_P14', 'Strom.WL_P14', 'W') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkleistung P23:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WL_P23', 'Strom.WL_P23', 'W') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Blindleistung Q12:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.BL_Q12', 'Strom.BL_Q12', 'var') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Blindleistung Q34:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.BL_Q34', 'Strom.BL_Q34', 'var') }}
+						</td>
+					</tr>
+				</table>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkleistung P14 L1:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WL_P14_L1', 'Strom.WL_P14_L1', 'W') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkleistung P14 L2:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WL_P14_L2', 'Strom.WL_P14_L2', 'W') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Wirkleistung P14 L3:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.WL_P14_L3', 'Strom.WL_P14_L3', 'W') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Spannung & Strom</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Spannung L1:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.U_L1', 'Strom.U_L1', 'V') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Spannung L2:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.U_L2', 'Strom.U_L2', 'V') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Spannung L3:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.U_L3', 'Strom.U_L3', 'V') }}
+						</td>
+					</tr>
+				</table>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Strom L1:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.I_L1', 'Strom.I_L1', 'A') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Strom L2:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.I_L2', 'Strom.I_L2', 'A') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Strom L3:
+						</td>
+						<td align=right>
+							{{ basic.float('Strom.I_L3', 'Strom.I_L3', 'A') }}
+						</td>
+					</tr>
+				</table>
+
+/**
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Verbrauch heute:
+						</td>
+						<td align=right>
+							{{ basic.float('ELTverbrauchHEUTE', 'Strom.ELTVerHeute', '&nbsp;kWh') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Kosten heute:
+						</td>
+						<td align=right>
+							{{ basic.float('ELTkostenheute', 'Strom.ELTKoHeute', '&nbsp;€') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Verbrauch gestern:
+						</td>
+						<td align=right>
+							{{ basic.float('ELTverbrauchGESTERN', 'Strom.ELTVerGester', '&nbsp;kWh') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Kosten gestern:
+						</td>
+						<td align=right>
+							{{ basic.float('ELTkostenGESTERN', 'Strom.ELTKoGester', '&nbsp;€') }}
+						</td>
+					</tr>
+				</table>
+*/
+			</div>
+		</div>
+	</div>
+
+/**
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Wasser</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Jahresverbrauch:
+						</td>
+						<td align=right>
+							{{ basic.float('WasserJahrVerbrauch', 'Wasser.WasserVerbJahr', '&nbsp;l') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Jahreskosen:
+						</td>
+						<td align=right>
+							{{ basic.float('WasserJahrKosten', 'Wasser.WasserKoJahr', '&nbsp;€') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Verbrauch heute:
+						</td>
+						<td align=right>
+							{{ basic.float('WasserHeuteVerbrauch', 'Wasser.WasserVerbHeute', '&nbsp;l') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Kosten heute:
+						</td>
+						<td align=right>
+							{{ basic.float('WasserHeuteKosten', 'Wasser.WasserKoHeute', '&nbsp;€') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Verbrauch gestern:
+						</td>
+						<td align=right>
+							{{ basic.float('WasserGesternVerbrauch', 'Wasser.WasserVerbGestern', '&nbsp;l') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Kosten gestern:
+						</td>
+						<td align=right>
+							{{ basic.float('WasserGesternKosten', 'Wasser.WasserKoGestern', '&nbsp;€') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Verbrauch 7 Tage:
+						</td>
+						<td align=right>
+							{{ basic.float('Wasser7TageVerbrauch', 'Wasser.WasserVerb7Tage', '&nbsp;l') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Kosten 7 Tage:
+						</td>
+						<td align=right>
+							{{ basic.float('Wasser7TageKosten', 'Wasser.WasserKo7Tage', '&nbsp;€') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							&nbsp;
+						</td>
+						<td align=right>
+							&nbsp;
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+*/
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% import "tom.html" as tom %}
+
+{% block content %}
+
+	<h1><img class="icon" src='{{ icon0 }}scene_livingroom.svg' />Essen</h1>
+
+	
+/**
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Heizung Essen</h3>
+			{{ tom.rtr('Essen.Heizung.RTR', '', 'Temperaturen.Essen.Raum', 'Heizung.Essen.Soll', 'Heizung.Essen.Sollwertverschiebung', 'Heizung.Essen.Komfort', 'Heizung.Essen.Nacht', 'Heizung.Essen.Frostschutz', 'Heizung.Essen.Heizen', 'Heizung.Essen.Stellwert') }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>RTR Plot Essen</h3>
+			{{ plot.rtr('Essen.Heizung.Plot', 'Temperaturen.Essen.Raum', 'Heizung.Essen.Soll', 'Heizung.Essen.Stellwert') }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Stellwert Essen</h3>
+			{{ plot.period('Essen.Heizung.Stellwert', 'Heizung.Essen.Stellwert', 'max', '24h', '', 0, 100, '', 'Stellwert Essen', '', '', ['', '% Offen'], '1h' ) }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Raumtemperatur Essen</h3>
+			{{ plot.period('Essen.Heizung.Temp', 'Temperaturen.Essen.Raum', 'max', '24h', '', '', '', '', 'Raumtemperatur', '', '', ['', '°C'], '1h' ) }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Essen Raumtemperaturen</h3>
+			{{ plot.period('Essen.Temperaturen.Raumtemperatur', ['Heizung.Essen.Soll', 'Temperaturen.Essen.Raum', 'Temperaturen.Essen.1W_Cheminee_Taster'], 'max', '24h', '', '', '', '', ['Soll', 'Raum', '1W Cheminee Taster'], '', '', ['', '°C'], '1h' ) }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Essen Estrichtemperaturen</h3>
+			{{ plot.period('Essen.Temperaturen.Estrichtemperatur', ['Heizung.Essen.Soll', 'Temperaturen.Essen.1W_Cheminee', 'Temperaturen.Essen.1W_Bodendose_Fenster', 'Temperaturen.Essen.1W_TV_links', 'Temperaturen.Essen.1W_TV_rechts'], 'max', '24h', '', '', '', '', ['Soll', '1W Cheminee', '1W Bodendose Fenster', '1W TV links', '1W TV rechts'], '', '', ['', '°C'], '1h' ) }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Essen rel. Feuchtigkeit</h3>
+			{{ plot.period('Essen.Feuchte.Feuchte', 'Temperaturen.Essen.Feuchte', 'max', '24h', '', 0, 100, '', 'Luftfeuchtigkeit', '', '', ['', '% rel. Feuchtigkeit'], '1h' ) }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Essen Taupunkt</h3>
+			{{ plot.period('Essen.Feuchte.Taupunkt', 'Temperaturen.Essen.Taupunkt', 'max', '24h', '', 0, 30, '', 'Taupunkt', '', '', ['', '°C'], '1h' ) }}
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Essen Komfort</h3>
+			{{ plot.comfortchart('Essen.Feuchte.Komfort', 'Temperaturen.Essen.Raum', 'Temperaturen.Essen.Feuchte') }}
+		</div>
+	</div>
+</div>
+
+*/
+
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Licht</h3>
+			{{ device.dimmer('Essen.Licht.WandCheminee', 'Wand & Cheminee', 'Essen.Licht.WandCheminee', 'Essen.Licht.WandCheminee.dimmen', 0, 100, 5 ) }}
+			{{ device.dimmer('Essen.Licht.Fenster', 'Fenster', 'Essen.Licht.Fenster', 'Essen.Licht.Fenster.dimmen', 0, 100, 5 ) }}
+			{{ device.dimmer('Essen.Licht.Aussen', 'Essen Aussen', 'Essen.Licht.Aussen', 'Essen.Licht.Aussen.dimmen', 0, 100, 5 ) }}
+			{{ device.dimmer('Wohnen.Licht.Aussen', 'Wohnen Aussen', 'Wohnen.Licht.Aussen', 'Wohnen.Licht.Aussen.dimmen', 0, 100, 5 ) }}
+			{{ device.dimmer('Essen.Licht.Aussen', 'Sitzplatz', 'Essen.Licht.Sitzplatz', 'Essen.Licht.Sitzplatz.dimmen', 0, 100, 5 ) }}
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+

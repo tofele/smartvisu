@@ -1,0 +1,118 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+{% import "widget_uzsu.html" as uzsu %}
+
+
+	<h1><img class="icon" src='{{ icon0 }}scene_workshop.svg' />Basteln</h1>
+
+	
+	<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Licht</h3>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Neonröhren:
+						</td>
+						<td align=left style="padding-left: 10px;">
+							{{ basic.switch('Basteln.Licht.Deckenlampe', 'Basteln.Licht.Deckenlampe', icon1~'light_ceiling_light.png', icon0~'light_ceiling_light.png') }}
+						</td>
+						<td align=right>
+							{{ uzsu.uzsu_icon('Basteln.Licht.Deckenlampe.uzsu', 'Basteln.Licht.Deckenlampe.uzsu', 'Deckenlampe') }}
+						</td>
+					</tr>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							PIR Ein/Aus (Taster):
+						</td>
+						<td align=left style="padding-left: 10px;">
+							{{ basic.flip('Basteln.Licht.PIR', 'Basteln.Licht.PIR', 'Ein', 'Aus') }}
+						</td>
+						<td align=right>
+							{{ uzsu.uzsu_icon('Basteln.Licht.PIR.uzsu', 'Basteln.Licht.PIR.uzsu', 'PIR Ein/Aus (Taster)') }}
+						</td>
+					</tr>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							PIR Sperre:
+						</td>
+						<td align=left style="padding-left: 10px;">
+							{{ basic.flip('Basteln.Licht.Sperre', 'Basteln.Licht.Sperre', 'Ein', 'Aus') }}
+						</td>
+						<td align=right>
+							{{ uzsu.uzsu_icon('Basteln.Licht.Sperre.uzsu', 'Basteln.Licht.Sperre.uzsu', 'PIR Sperre') }}
+						</td>
+					</tr>
+				</table>
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Heizung Basteln</h3>
+			{% import "tom.html" as tom %} {{ tom.rtr('Basteln.Heizung.RTR', '', 'Temperaturen.Basteln.Raum', 'Heizung.Basteln.Soll', 'Heizung.Basteln.Sollwertverschiebung', 'Heizung.Basteln.Komfort', 'Heizung.Basteln.Nacht', 'Heizung.Basteln.Frostschutz', 'Heizung.Basteln.Heizen', 'Heizung.Basteln.Stellwert') }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>RTR Plot Basteln</h3>
+			{{ plot.rtr('Basteln.Heizung.Plot', 'Temperaturen.Basteln.Raum', 'Heizung.Basteln.Soll', 'Heizung.Basteln.Stellwert') }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Stellwert Basteln</h3>
+			{{ plot.period('Basteln.Heizung.Stellwert', 'Heizung.Basteln.Stellwert', 'max', '24h', '', 0, 100, '', 'Stellwert Basteln', '', '', ['', '% Offen'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Raumtemperatur Basteln</h3>
+			{{ plot.period('Basteln.Heizung.Temp', 'Temperaturen.Basteln.Raum', 'max', '24h', '', '', '', '', 'Raumtemperatur', '', '', ['', '°C'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Basteln Temperaturen</h3>
+			{{ plot.period('Basteln.Temperaturen', ['Heizung.Basteln.Soll', 'Temperaturen.Basteln.Raum'], 'max', '24h', '', '', '', '', ['Soll', 'Raum'], '', '', ['', '°C'], '1h' ) }}
+		</div>
+
+	</div>
+</div>
+
+
+{% endblock %}
+

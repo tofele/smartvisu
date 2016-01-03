@@ -1,0 +1,97 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Tomas Felner
+* @copyright   2014
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+
+	<style>
+		.nav-custom .ui-btn .ui-btn-inner {
+			padding-top: 40px !important;
+		}
+
+		.nav-custom .ui-btn .ui-icon {
+			width: 30px !important;
+			height: 30px !important;
+			margin-left: -15px !important;
+			box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			-webkit-box-shadow: none !important;
+			-webkit-border-radius: 0 !important;
+			border-radius: 0 !important;
+		}
+
+		#technik .ui-icon {
+			background: url({{ icon0 }}sani_boiler_temp.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#strom .ui-icon {
+			background: url({{ icon0 }}measure_power_meter.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#luxtronic .ui-icon {
+			background: url({{ icon0 }}sani_earth_source_heat_pump.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#solar .ui-icon {
+			background: url({{ icon0 }}sani_solar.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#wasser .ui-icon {
+			background: url({{ icon0 }}sani_water_tap.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#lueftung .ui-icon {
+			background: url({{ icon0 }}vent_ventilation.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#quadra .ui-icon {
+			background: url({{ icon0 }}weather_station_quadra.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+	</style>
+	<div data-role="navbar" class="nav-custom">
+		<ul>
+			<li><a href="index.php?page=Technik" id="technik" data-icon="custom">Übersicht</a></li>
+			<li><a href="index.php?page=Strom" class="ui-btn-active" id="strom" data-icon="custom">Strom</a></li>
+			<li><a href="index.php?page=Luxtronic" id="luxtronic" data-icon="custom">Wärmepumpe</a></li>
+			/**
+			<li><a href="index.php?page=Solar" id="solar" data-icon="custom">Solar</a></li>
+			<li><a href="index.php?page=Wasser" id="wasser" data-icon="custom">Wasser</a></li>
+			*/
+            <li><a href="index.php?page=Lueftung" id="lueftung" data-icon="custom">Lüftung</a></li>
+			<li><a href="index.php?page=Quadra" id="quadra" data-icon="custom">Quadra</a></li>
+		</ul>
+	</div>
+
+
+	<div class="preblock">
+		<table width="100%">
+			<tr>
+				<td align="middle" width="70%">
+					BeSmart
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+	<iframe src="https://be-smart.ch/smarties_home/page/login_user_area/" style="width:100%; height:700px; border:0;" seamless></iframe>
+
+{% endblock %}
+

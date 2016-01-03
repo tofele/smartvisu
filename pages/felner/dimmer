@@ -1,0 +1,9 @@
+<div class="block">
+	<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+		<div data-role="collapsible" data-collapsed="false">
+			<h3>Licht</h3>
+			{{ device.dimmer('Wohnen.Licht.Cheminee', 'Cheminee', 'Wohnen.Licht.Cheminee', 'Wohnen.Licht.Cheminee.dimmen', 0, 100, 5 ) }}
+			{{ device.dimmer('Wohnen.Licht.Fenster', 'Fenster', 'Wohnen.Licht.Fenster', 'Wohnen.Licht.Fenster.dimmen', 0, 100, 5 ) }}
+		</div>
+	</div>
+</div>

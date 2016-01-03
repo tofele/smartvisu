@@ -1,0 +1,323 @@
+/**
+* -----------------------------------------------------------------------------
+* @package     smartVISU
+* @author      Martin Gleiß
+* @copyright   2012
+* @license     GPL [http://www.gnu.de]
+* -----------------------------------------------------------------------------
+*/
+
+
+{% extends "rooms.html" %}
+
+{% block content %}
+
+	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+
+	<style>
+		.nav-custom .ui-btn .ui-btn-inner {
+			padding-top: 40px !important;
+		}
+
+		.nav-custom .ui-btn .ui-icon {
+			width: 30px !important;
+			height: 30px !important;
+			margin-left: -15px !important;
+			box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			-webkit-box-shadow: none !important;
+			-webkit-border-radius: 0 !important;
+			border-radius: 0 !important;
+		}
+
+		#technik .ui-icon {
+			background: url({{ icon0 }}sani_boiler_temp.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#strom .ui-icon {
+			background: url({{ icon0 }}measure_power_meter.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#luxtronic .ui-icon {
+			background: url({{ icon0 }}sani_earth_source_heat_pump.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#solar .ui-icon {
+			background: url({{ icon0 }}sani_solar.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#wasser .ui-icon {
+			background: url({{ icon0 }}sani_water_tap.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#lueftung .ui-icon {
+			background: url({{ icon0 }}vent_ventilation.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+
+		#quadra .ui-icon {
+			background: url({{ icon0 }}weather_station_quadra.png) 50% 50% no-repeat;
+			background-size: 36px 36px;
+		}
+	</style>
+	<div data-role="navbar" class="nav-custom">
+		<ul>
+			<li><a href="index.php?page=Technik" id="technik" data-icon="custom">Übersicht</a></li>
+			<li><a href="index.php?page=Strom" id="strom" data-icon="custom">Strom</a></li>
+			<li><a href="index.php?page=Luxtronic" id="luxtronic" data-icon="custom">Wärmepumpe</a></li>
+			/**
+			<li><a href="index.php?page=Solar" id="solar" data-icon="custom">Solar</a></li>
+			<li><a href="index.php?page=Wasser" id="wasser" data-icon="custom">Wasser</a></li>
+			*/
+            <li><a href="index.php?page=Lueftung" class="ui-btn-active" id="lueftung" data-icon="custom">Lüftung</a></li>
+			<li><a href="index.php?page=Quadra" id="quadra" data-icon="custom">Quadra</a></li>
+		</ul>
+	</div>
+
+/**
+	<div class="preblock">
+		<table width="100%">
+			<tr>
+				<td align="middle" width="70%">
+					Lüftung
+				</td>
+			</tr>
+		</table>
+	</div>
+*/
+
+	<h3>Lüftungsanlage</h3>
+	{{ plot.period('Lueftung.Temperatur', ['Lueftung.Temperatur.Aussenluft', 'Lueftung.Temperatur.Zuluft', 'Lueftung.Temperatur.Abluft', 'Lueftung.Temperatur.Fortluft'], 'max', '24h', '', 0, 35, '', ['Aussenluft', 'Zuluft', 'Abluft', 'Fortluft'], ['#a00', '#00a', '#0a0', '#aa0'], '', ['', '°C'], '1h' ) }}
+
+
+/**
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Komforttemperatur</h3>
+				{{ plot.period('Plot.Lueftung.Temperatur.Komfort', 'Lueftung.Temperatur.Komfort', 'max', '24h', '', 0, 35, '', 'Komforttemperatur', '', '', ['', '°C'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+*/
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Aussenluft</h3>
+				{{ plot.period('Plot.Lueftung.Temperatur.Aussenluft', 'Lueftung.Temperatur.Aussenluft', 'max', '24h', '', 0, 35, '', 'Aussenluft', '', '', ['', '°C'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Zuluft</h3>
+				{{ plot.period('Plot.Lueftung.Temperatur.Zuluft', 'Lueftung.Temperatur.Zuluft', 'max', '24h', '', 0, 35, '', 'Zuluft', '', '', ['', '°C'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Abluft</h3>
+				{{ plot.period('Plot.Lueftung.Temperatur.Abluft', 'Lueftung.Temperatur.Abluft', 'max', '24h', '', 0, 35, '', 'Abluft', '', '', ['', '°C'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Fortluft</h3>
+				{{ plot.period('Plot.Lueftung.Temperatur.Fortluft', 'Lueftung.Temperatur.Fortluft', 'max', '24h', '', 0, 35, '', 'Fortluft', '', '', ['', '°C'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Ventilator Zuluft</h3>
+				{{ plot.period('Plot.Lueftung.Status.Ventilator_Zuluft', 'Lueftung.Status.Ventilator_Zuluft', 'max', '24h', '', 0, 100, '', 'Ventilator Zuluft', '', '', ['', '% Leistung'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Ventilator Abluft</h3>
+				{{ plot.period('Plot.Lueftung.Status.Ventilator_Abluft', 'Lueftung.Status.Ventilator_Abluft', 'max', '24h', '', 0, 100, '', 'Ventilator Abluft', '', '', ['', '% Leistung'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Aktuelle Stufe</h3>
+				{{ plot.period('Plot.Lueftung.Status.Stufe', 'Lueftung.Status.Stufe', 'max', '24h', '', 0, 4, '', 'Aktuelle Stufe', '', '', ['', 'Stufe'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Bypass</h3>
+				{{ plot.period('Plot.Lueftung.Status.Bypass', 'Lueftung.Status.Bypass', 'max', '24h', '', 0, 100, '', 'Bypass', '', '', ['', '%'], '1h' ) }}
+			</div>
+
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Aktuelle Daten:</h3>
+
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Komforttemparatur:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Komfort', 'Lueftung.Temperatur.Komfort', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Aussenluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Aussenluft', 'Lueftung.Temperatur.Aussenluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Zuluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Zuluft', 'Lueftung.Temperatur.Zuluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Abluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Abluft', 'Lueftung.Temperatur.Abluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Fortluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Fortluft', 'Lueftung.Temperatur.Fortluft', '°C') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Ventilator Zuluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Vent.Zuluft', 'Lueftung.Status.Ventilator_Zuluft', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Ventilator Abluft:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Vent.Abluft', 'Lueftung.Status.Ventilator_Abluft', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Bypass:
+						</td>
+						<td align=right>
+							{{ basic.float('Lueftung.Status.Bypass', 'Lueftung.Status.Bypass', '%') }}
+						</td>
+					</tr>
+				</table>
+				<table width=100%>
+					<tr>
+						<td align=left style="padding-left: 10px;">
+							Lüftungsstufe:
+						</td>
+						<td align=right>
+							{{ basic.value('Lueftung.Status.Stufe', 'Lueftung.Status.Stufe') }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+/**
+	<div class="block">
+		<div class="set-2" data-role="collapsible-set" data-theme="c" data-content-theme="a" data-mini="true">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Status Lüftung:</h3>
+				<table width="100%">
+					<tr>
+						<td align="left">
+							{{ basic.symbol('Lux.HUP1', 'Luxtronic.HUP', 'Heizug Umwälzpumpe läuft', icon1~'sani_pump.png') }}
+							{{ basic.symbol('Lux.HUP2', 'Luxtronic.HUP', 'Heizug Umwälzpumpe läuft nicht', icon0~'sani_pump.png', 0) }}
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							{{ basic.symbol('Lux.BUP1', 'Luxtronic.BUP', 'Warmwasser Umwälzpumpe läuft', icon1~'sani_pump.png') }}
+							{{ basic.symbol('Lux.BUP2', 'Luxtronic.BUP', 'Warmwasser Umwälzpumpe läuft nicht', icon0~'sani_pump.png', 0) }}
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							{{ basic.symbol('Lux.MA1', 'Luxtronic.MA1', 'Mischer 1 Auf', icon1~'sani_pump.png') }}
+							{{ basic.symbol('Lux.MZ1', 'Luxtronic.MZ1', 'Mischer 1 Zu', icon1~'sani_pump.png', 0) }}
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+*/
+
+
+{% endblock %}
+
